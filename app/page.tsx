@@ -240,24 +240,12 @@ export default function MeetFlow() {
 
   function batchToggleMySlots(slots: TimeSlot[], fill: boolean) {
     setMembers((prev) =>
-      prev.map((m) =>
-        m.id !== "me"
-          ? m
-          : {
-<<<<<<< HEAD
-              ...m,
-              availability: fill
-                ? [...new Set([...m.availability, ...slots])]
-                : m.availability.filter((x) => !slots.includes(x)),
-            }
-=======
-            ...m,
-            availability: m.availability.includes(s)
-              ? m.availability.filter((x) => x !== s)
-              : [...m.availability, s],
-          }
->>>>>>> feat/meeting-reminder-badge
-      )
+      prev.map((m) => ({
+        ...m,
+        availability: fill
+          ? [...new Set([...m.availability, ...slots])]
+          : m.availability.filter((x) => !slots.includes(x)),
+      }))
     );
   }
 
